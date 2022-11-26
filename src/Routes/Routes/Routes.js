@@ -4,6 +4,7 @@ import Blog from "../../Pages/Blog/Blog";
 import Categories from "../../Pages/Categories/Categories";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
+import SignUp from "../../Pages/SignUp/SignUp";
 
 const router = createBrowserRouter([
     {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
                 element:<Login></Login>
             },
             {
+                path:'/signup',
+                element:<SignUp></SignUp>
+            },
+            {
                 path:'/categories',
                 element:<Categories></Categories>
             },
@@ -27,6 +32,10 @@ const router = createBrowserRouter([
                 element:<Blog></Blog>
             }
         ]
+    },
+    {
+        path:'*',
+        element:<h2 className="text-red-600 text-4xl text-center font-bold mt-20" >404 page no found</h2>
     }
 ])
 
