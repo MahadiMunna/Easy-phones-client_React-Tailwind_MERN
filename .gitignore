@@ -24,7 +24,5 @@ yarn-error.log*
 
 /src/contexts
 /src/firebase
-/src/Pages
-/src/Routes/PrivateRoute
 
 
