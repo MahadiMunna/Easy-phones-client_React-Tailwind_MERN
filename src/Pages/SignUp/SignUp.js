@@ -5,9 +5,24 @@ import { Link } from 'react-router-dom';
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [error, setError] = useState('');
-
+    const imagebbKey = process.env.REACT_APP_imgbb_key;
     const handleSignUp = data => {
         console.log(data);
+        const image = data.image[0];
+        const formData = new FormData();
+        formData.append('image',image);
+        const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imagebbKey}`;
+        fetch(url,{
+            method: 'POST',
+            body: formData
+        })
+        .then(res=>res.json())
+        .then(imageData => {
+            if(imageData.success){
+                console.log(imageData.data.url);
+            }
+        })
+
 
     }
     return (
