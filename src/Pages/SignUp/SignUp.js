@@ -29,8 +29,8 @@ const SignUp = () => {
         })
         createUser(data.email,data.password)
         .then(result=>{
+            setError('');
             const user = result.user;
-            console.log(user);
             const userInfo = {
                 displayName : data.name,
                 photoURL : imgUrl
