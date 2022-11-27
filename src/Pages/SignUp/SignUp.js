@@ -36,6 +36,7 @@ const SignUp = () => {
                 photoURL : imgUrl
             }
             updateUser(userInfo)
+
             .then(()=>{})
             .catch(error=>console.log(error))
         })

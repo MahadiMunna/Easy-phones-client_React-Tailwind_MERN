@@ -1,11 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
+import DashboardLayout from "../../Layouts/DashboardLayout";
 import Main from "../../Layouts/Main";
+import AllPhones from "../../Pages/AllPhones/AllPhones";
+import AvailablePhones from "../../Pages/AvailablePhones/AvailablePhones";
 import Blog from "../../Pages/Blog/Blog";
-import Categories from "../../Pages/Categories/Categories";
 import Dashboard from "../../Pages/Dashboard/Dashboard";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import SignUp from "../../Pages/SignUp/SignUp";
+import PrivateRoute from "../PrivateRoutes/PrivateRoutes";
 
 const router = createBrowserRouter([
     {
@@ -25,8 +28,14 @@ const router = createBrowserRouter([
                 element:<SignUp></SignUp>
             },
             {
-                path:'/categories',
-                element:<Categories></Categories>
+                path:'/products',
+                element:<AllPhones></AllPhones>
+            },
+            {
+                path:'/categories/:id',
+                element:<AvailablePhones></AvailablePhones>,
+                loader: ({ params }) => fetch(`http://localhost:5000/categories/${params.id}`)
+
             },
             {
                 path:'/blog',
@@ -36,7 +45,13 @@ const router = createBrowserRouter([
     },
     {
         path:'/dashboard',
-        element:<Dashboard></Dashboard>
+        element:<DashboardLayout></DashboardLayout>,
+        children:[
+            {
+                path:'/dashboard',
+                element:<Dashboard></Dashboard>
+            }
+        ]
     },
     {
         path:'*',
