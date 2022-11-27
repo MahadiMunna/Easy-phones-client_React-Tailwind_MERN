@@ -13,7 +13,7 @@ const Categories = () => {
     return (
         <div>
             <h2 className='text-center font-semibold mt-16 text-3xl mb-8 text-green-600'>Select your category</h2>
-            <div className='flex justify-around  font-bold mx-20 mb-10'>
+            <div className='flex justify-around  font-bold md:mx-20 mb-10'>
                 {
                     categories.map(category => <div><Link to={`/categories/${category._id}`} key={category._id} className='hover:text-blue-600 cursor-pointer'>{category.brand}</Link></div>)
                 }
