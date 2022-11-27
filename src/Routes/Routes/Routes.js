@@ -9,6 +9,7 @@ import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import SignUp from "../../Pages/SignUp/SignUp";
 import PrivateRoute from "../PrivateRoutes/PrivateRoutes";
+import img from '../../assets/404.jpg';
 
 const router = createBrowserRouter([
     {
@@ -55,7 +56,10 @@ const router = createBrowserRouter([
     },
     {
         path:'*',
-        element:<h2 className="text-red-600 text-4xl text-center font-bold mt-20" >404 page no found</h2>
+        element: <div className="text-center mx-48">
+            <img src={img} alt=''/>
+            <h2 className="text-red-600 text-4xl text-center font-bold mt-10" >404 page no found</h2>
+            </div>
     }
 ])
 
