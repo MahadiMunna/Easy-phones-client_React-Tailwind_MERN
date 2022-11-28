@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import useTitle from '../../../Hooks/useTitle';
 
 const AllUsers = () => {
+    useTitle('All users')
     const [users, setUsers] = useState([]);
 
     useEffect(() => {

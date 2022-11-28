@@ -3,8 +3,10 @@ import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
+import useTitle from '../../Hooks/useTitle';
 
 const Login = () => {
+    useTitle('Login');
     
     const { register, formState:{errors}, handleSubmit } = useForm();
     const {signIn, providerLogin} = useContext(AuthContext);
@@ -20,6 +22,7 @@ const Login = () => {
         .then(result=>{
             const user = result.user;
             console.log(user);
+            
             navigate(from,{replace:true})
         })
         .catch(error=>setError(error.message))
@@ -32,6 +35,18 @@ const Login = () => {
             const user = result.user;
             console.log(user)
             navigate(from, {replace: true});
+            const profile = {
+                name: user.displayName,
+                email: user.email,
+                role: "Buyer"
+            }
+            fetch('http://localhost:5000/users', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(profile)
+            })
         })
         .catch(error=>{
             console.log(error)

@@ -3,7 +3,7 @@ import { Link, Outlet } from 'react-router-dom';
 import Navbar from '../Pages/Shared/Navbar/Navbar';
 
 const DashboardLayout = () => {
-    
+        
     return (
         <div>
             <Navbar></Navbar>
