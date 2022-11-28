@@ -20,9 +20,7 @@ const Login = () => {
         setError('');
         signIn(data.email,data.password)
         .then(result=>{
-            const user = result.user;
-            console.log(user);
-            
+            const user = result.user;            
             navigate(from,{replace:true})
         })
         .catch(error=>setError(error.message))
