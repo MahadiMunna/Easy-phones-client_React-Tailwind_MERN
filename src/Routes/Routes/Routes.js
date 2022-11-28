@@ -12,6 +12,10 @@ import img from '../../assets/404.jpg';
 import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoutes/PrivateRoutes";
+import Reports from "../../Pages/Dashboard/Reports/Reports";
+import MyProducts from "../../Pages/Dashboard/MyProducts/MyProducts";
+import SellerRoute from "../SellerRoute/SellerRoute";
+import AddProduct from "../../Pages/Dashboard/AddProduct/AddProduct";
 
 const router = createBrowserRouter([
     {
@@ -53,6 +57,22 @@ const router = createBrowserRouter([
             {
                 path:'/dashboard',
                 element:<Dashboard></Dashboard>
+            },
+            {
+                path:'/dashboard/users',
+                element:<AdminRoute><AllUsers></AllUsers></AdminRoute>
+            },
+            {
+                path:'/dashboard/reports',
+                element:<AdminRoute><Reports></Reports></AdminRoute>
+            },
+            {
+                path:'/dashboard/my-products',
+                element:<SellerRoute><MyProducts></MyProducts></SellerRoute>
+            },
+            {
+                path:'/dashboard/add-product',
+                element:<SellerRoute><AddProduct></AddProduct></SellerRoute>
             },
             {
                 path:'/dashboard/users',

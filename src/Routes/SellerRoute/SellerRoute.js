@@ -2,18 +2,18 @@ import React, { useContext } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { PropagateLoader } from 'react-spinners';
 import { AuthContext } from '../../Contexts/AuthProvider';
-import useAdmin from '../../Hooks/useAdmin';
+import useSeller from '../../Hooks/useSeller';
 
-const AdminRoute = ({children}) => {
+const SellerRoute = ({children}) => {
     const {user, loading} = useContext(AuthContext);
-    const [isAdmin,isAdminLoading] = useAdmin(user?.email)
+    const [isSeller,isSellerLoading] = useSeller(user?.email)
     const location = useLocation();
     
-    if(loading || isAdminLoading){
+    if(loading || isSellerLoading){
         return <><PropagateLoader color="#36d7b7" /></>
     }
 
-    if(user && isAdmin){
+    if(user && isSeller){
         return children;
     }
      
@@ -21,4 +21,4 @@ const AdminRoute = ({children}) => {
     
 };
 
-export default AdminRoute;
+export default SellerRoute;
