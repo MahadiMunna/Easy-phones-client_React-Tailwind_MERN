@@ -27,6 +27,18 @@ const AllUsers = () => {
             })
 
     }
+    const handleDelete = id =>{
+        fetch(`http://localhost:5000/users/${id}`, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                if(data.deletedCount > 0){
+                    toast.success('User deleted successfully');
+                    refetch();
+                }
+            })
+    }
     return (
         <div className="overflow-x-auto mt-4">
             <table className="table w-full">
@@ -52,7 +64,7 @@ const AllUsers = () => {
                                 }
                             </td>
                             <td>
-                                <div className="badge badge-error gap-2 cursor-pointer">
+                                <div onClick={()=>handleDelete(user._id)} className="badge badge-error gap-2 cursor-pointer">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-4 h-4 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                                     Delete
                                 </div>
