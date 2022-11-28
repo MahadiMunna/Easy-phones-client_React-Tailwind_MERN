@@ -5,7 +5,7 @@ import { AuthContext } from '../../Contexts/AuthProvider';
 
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const {createUser, updateUser} = useContext(AuthContext);
+    const { createUser, updateUser } = useContext(AuthContext);
     const [error, setError] = useState('');
     const [imgUrl, setImgUrl] = useState('');
     const imgbbKey = process.env.REACT_APP_imgbb_key;
@@ -14,33 +14,45 @@ const SignUp = () => {
         console.log(data);
         const image = data.image[0];
         const formData = new FormData();
-        formData.append('image',image);
+        formData.append('image', image);
         const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imgbbKey}`;
-        fetch(url,{
+        fetch(url, {
             method: 'POST',
             body: formData
         })
-        .then(res=>res.json())
-        .then(imageData => {
-            if(imageData.success){
-                console.log(imageData.data.url);
-                setImgUrl(imageData.data.url);
-            }
-        })
-        createUser(data.email,data.password)
-        .then(result=>{
-            setError('');
-            const user = result.user;
-            const userInfo = {
-                displayName : data.name,
-                photoURL : imgUrl
-            }
-            updateUser(userInfo)
+            .then(res => res.json())
+            .then(imageData => {
+                if (imageData.success) {
+                    console.log(imageData.data.url);
+                    setImgUrl(imageData.data.url);
+                }
+            })
+        createUser(data.email, data.password)
+            .then(result => {
+                setError('');
+                const user = result.user;
+                const userInfo = {
+                    displayName: data.name,
+                    photoURL: imgUrl
+                }
+                const profile = {
+                    name: data.name,
+                    email: data.email,
+                    role: data.role
+                }
+                fetch('http://localhost:5000/users', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(profile)
+                })
+                updateUser(userInfo)
+                    .then(() => { })
+                    .catch(error => console.log(error))
 
-            .then(()=>{})
-            .catch(error=>console.log(error))
-        })
-        .catch(error=>setError(error))
+            })
+            .catch(error => setError(error))
     }
     return (
         <div className='h-[800px] flex justify-center items-center'>
@@ -65,7 +77,7 @@ const SignUp = () => {
                     </div>
 
                     <div className="form-control w-full max-w-xs">
-                    <label className="label">
+                        <label className="label">
                             <span className="label-text">Are you seller or buyer?</span>
                         </label>
                         <select {...register("role")} className="select select-bordered w-full max-w-xs">

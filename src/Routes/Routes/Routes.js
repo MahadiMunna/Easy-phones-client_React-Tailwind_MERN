@@ -56,7 +56,7 @@ const router = createBrowserRouter([
     },
     {
         path:'*',
-        element: <div className="text-center mx-48">
+        element: <div className="text-center md:mx-28 lg:mx-48">
             <img src={img} alt=''/>
             <h2 className="text-red-600 text-4xl text-center font-bold mt-10" >404 page no found</h2>
             </div>
