@@ -3,17 +3,16 @@ import React from 'react';
 import toast from 'react-hot-toast';
 import useTitle from '../../../Hooks/useTitle';
 
-const AllUsers = () => {
+const AllSellers = () => {
     useTitle('All users')
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await fetch('https://easy-phones.vercel.app/users');
+            const res = await fetch('https://easy-phones.vercel.app/seller');
             const data = await res.json();
             return data;
         }
     })
-
     const handleMakeAdmin = id => {
         const confirmation = window.confirm('Are you sure?');
         if (confirmation) {
@@ -83,4 +82,4 @@ const AllUsers = () => {
     );
 };
 
-export default AllUsers;
+export default AllSellers;

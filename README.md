@@ -1,3 +1,26 @@
+# Project Name: Easy Phones
+
+# Features
+
+> You can sign in here as a buyer or a seller.
+> When you are a seller you can add product for sale.
+> When you are buyer you can add your product to your buy list.
+> Admin can delete user.
+> User role stop routing in different role routes.
+
+# Functionalities
+
+> All users routes are different.
+> Private route prevent to visit private route with out signing in.
+> React, tailwind, daisy ui used
+> Deployed in firebase.
+> Server side deployed in vercel. 
+
+# live link : https://easy-phones.web.app/
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

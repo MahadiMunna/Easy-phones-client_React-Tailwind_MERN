@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
 import useTitle from '../../Hooks/useTitle';
@@ -45,19 +46,20 @@ const SignUp = () => {
                     email: data.email,
                     role: data.role
                 }
-                fetch('http://localhost:5000/users', {
+                fetch('https://easy-phones.vercel.app/users', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
                     },
                     body: JSON.stringify(profile)
                 })
-                
+
                 updateUser(userInfo)
-                    .then(() => { 
-                        navigate(from,{replace:true})
+                    .then(() => {
+                        navigate(from, { replace: true })
                     })
                     .catch(error => console.log(error))
+                toast.success('Sign up successfully and logged in');
 
             })
             .catch(error => setError(error))

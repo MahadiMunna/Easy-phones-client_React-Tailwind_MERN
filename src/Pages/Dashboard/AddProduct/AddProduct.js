@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Contexts/AuthProvider';
 import useTitle from '../../../Hooks/useTitle';
@@ -39,13 +40,14 @@ const AddProduct = () => {
             seller: user.displayName,
             email: user.email
         }
-        fetch('http://localhost:5000/phones', {
+        fetch('https://easy-phones.vercel.app/phones', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(product)
         })
+        toast.success('Product added successfully');
         navigate('/dashboard/my-products');
     }
     return (

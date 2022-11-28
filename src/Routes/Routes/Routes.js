@@ -18,76 +18,86 @@ import SellerRoute from "../SellerRoute/SellerRoute";
 import AddProduct from "../../Pages/Dashboard/AddProduct/AddProduct";
 import BuyerRoute from "../BuyerRoute/BuyerRoute";
 import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
+import AllBuyers from "../../Pages/Dashboard/AllBuyers/AllBuyers";
+import AllSellers from "../../Pages/Dashboard/AllSellers/AllSellers";
 
 const router = createBrowserRouter([
     {
-        path:'/',
-        element:<Main></Main>,
-        children:[
+        path: '/',
+        element: <Main></Main>,
+        children: [
             {
-                path:'/',
-                element:<Home></Home>
+                path: '/',
+                element: <Home></Home>
             },
             {
-                path:'/login',
-                element:<Login></Login>
+                path: '/login',
+                element: <Login></Login>
             },
             {
-                path:'/signup',
-                element:<SignUp></SignUp>
+                path: '/signup',
+                element: <SignUp></SignUp>
             },
             {
-                path:'/products',
-                element:<AllPhones></AllPhones>
+                path: '/products',
+                element: <AllPhones></AllPhones>
             },
             {
-                path:'/categories/:id',
-                element:<AvailablePhones></AvailablePhones>,
-                loader: ({ params }) => fetch(`http://localhost:5000/categories/${params.id}`)
+                path: '/categories/:id',
+                element: <AvailablePhones></AvailablePhones>,
+                loader: ({ params }) => fetch(`https://easy-phones.vercel.app/categories/${params.id}`)
 
             },
             {
-                path:'/blog',
-                element:<Blog></Blog>
+                path: '/blog',
+                element: <Blog></Blog>
             }
         ]
     },
     {
-        path:'/dashboard',
-        element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
-        children:[
+        path: '/dashboard',
+        element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+        children: [
             {
-                path:'/dashboard',
-                element:<Dashboard></Dashboard>
+                path: '/dashboard',
+                element: <Dashboard></Dashboard>
             },
             {
-                path:'/dashboard/users',
-                element:<AdminRoute><AllUsers></AllUsers></AdminRoute>
+                path: '/dashboard/users',
+                element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
             },
             {
-                path:'/dashboard/reports',
-                element:<AdminRoute><Reports></Reports></AdminRoute>
+                path: '/dashboard/buyers',
+                element: <AdminRoute><AllBuyers></AllBuyers></AdminRoute>
             },
             {
-                path:'/dashboard/my-products',
-                element:<SellerRoute><MyProducts></MyProducts></SellerRoute>
+                path: '/dashboard/sellers',
+                element: <AdminRoute><AllSellers></AllSellers></AdminRoute>
             },
             {
-                path:'/dashboard/add-product',
-                element:<SellerRoute><AddProduct></AddProduct></SellerRoute>
+                path: '/dashboard/reports',
+                element: <AdminRoute><Reports></Reports></AdminRoute>
             },
             {
-                path:'/dashboard/my-orders',
-                element:<BuyerRoute><MyOrders></MyOrders></BuyerRoute>
+                path: '/dashboard/my-products',
+                element: <SellerRoute><MyProducts></MyProducts></SellerRoute>
+            },
+            {
+                path: '/dashboard/add-product',
+                element: <SellerRoute><AddProduct></AddProduct></SellerRoute>
+            },
+            {
+                path: '/dashboard/my-orders',
+                element: <BuyerRoute><MyOrders></MyOrders></BuyerRoute>
             }
         ]
     },
     {
-        path:'*',
+        path: '*',
         element: <div className="text-center md:mx-28 lg:mx-48">
-            <img src={img} alt=''/>
+            <img src={img} alt='' />
             <h2 className="text-red-600 text-4xl text-center font-bold mt-10" >404 page no found</h2>
-            </div>
+        </div>
     }
 ])
 
