@@ -1,16 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import React from 'react';
+import toast from 'react-hot-toast';
 import useTitle from '../../../Hooks/useTitle';
 
 const AllUsers = () => {
     useTitle('All users')
-    const [users, setUsers] = useState([]);
+    const {data:users=[],refetch} = useQuery({
+        queryKey:['users'],
+        queryFn: async()=>{
+            const res = await fetch('http://localhost:5000/users');
+            const data = await res.json();
+            return data;
+        }
+    })
 
-    useEffect(() => {
-        fetch('http://localhost:5000/users')
+    const handleMakeAdmin = id => {
+        fetch(`http://localhost:5000/users/${id}`, {
+            method: 'PUT'
+        })
             .then(res => res.json())
-            .then(data => setUsers(data))
-    }, [])
-    console.log(users)
+            .then(data => {
+                if(data.modifiedCount > 0){
+                    toast.success('Added to admin panel');
+                    refetch();
+                }
+            })
+
+    }
     return (
         <div className="overflow-x-auto mt-4">
             <table className="table w-full">
@@ -30,7 +46,10 @@ const AllUsers = () => {
                             <td>{user.email}</td>
                             <td>{user.role}</td>
                             <td>
-                                <div className="badge badge-primary cursor-pointer">Admin</div>
+                                {
+                                    user?.role !== 'admin' &&
+                                    <div onClick={() => handleMakeAdmin(user._id)} className="badge badge-primary cursor-pointer">Admin</div>
+                                }
                             </td>
                             <td>
                                 <div className="badge badge-error gap-2 cursor-pointer">
