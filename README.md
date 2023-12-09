@@ -1,5 +1,7 @@
 # Project Name: Easy Phones
 
+This is the client side repository. Server side repository link: https://github.com/MahadiMunna/Easy-phones_Server-side_Backend
+
 # Features
 
 > You can sign in here as a buyer or a seller.
